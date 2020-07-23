@@ -1,0 +1,43 @@
+syntax = "proto3";
+package protos;
+
+import "google/protobuf/timestamp.proto";
+import "objectID.proto";
+
+option go_package = ".;protos";
+
+message User {
+    ObjectID id = 1;
+    string email = 2;
+    string username = 3;
+    string password = 4;
+    google.protobuf.Timestamp DOB = 5;
+}
+
+message Subscription {
+    ObjectID id = 1;
+    ObjectID userID = 2;
+    ObjectID podcastID = 3;
+    repeated ObjectID completedIDs = 4;
+    repeated ObjectID inProgressIDs = 5;
+} 
+
+message UserEpisode {
+    ObjectID id = 1;
+    ObjectID userID = 2;
+    ObjectID podcastID = 3;
+    ObjectID episodeID = 4;
+    int64 offset = 5;
+    google.protobuf.Timestamp lastSeen = 6;
+    bool played = 7;
+}
+
+message Session {
+    ObjectID id = 1;
+    ObjectID userID = 2;
+    string sessionKey = 3;
+    google.protobuf.Timestamp loginTime = 4;
+    google.protobuf.Timestamp lastSeenTime = 5;
+    google.protobuf.Timestamp expires = 6;
+    string userAgent = 7;
+}
