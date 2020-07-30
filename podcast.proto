@@ -55,10 +55,22 @@ message Episode {
 
 // (PodcastService)
 
+// start & end represen the amount of episodes to return
 message Request {
-    ObjectID userID = 1;
+    string token = 1;
     ObjectID podcastID = 2;
     ObjectID episodeID = 3;
+    int32 start = 4;
+    int32 end = 5;
+}
+
+message UserEpisodeReq {
+    string token = 1;
+    ObjectID podcastID = 2;
+    ObjectID episodeID = 3;
+    int64 offset = 4;
+    google.protobuf.Timestamp lastSeen = 5;
+    bool played = 6;
 }
 
 message Response {
@@ -66,11 +78,14 @@ message Response {
     string message = 2;
 }
 
-message UserEpiReq {
-    ObjectID userID = 1;
-    ObjectID episodeID = 2;
-    int64 offset = 3;
-    bool played = 4;
+message LastPlayedRes {
+    Podcast podcast = 1;
+    Episode episode = 2;
+    int64 millis = 3;
+}
+
+message Subscriptions {
+    repeated Subscription subscriptions = 1;
 }
 
 message Episodes {
@@ -80,7 +95,7 @@ message Episodes {
 service PodcastService{
     rpc GetEpisodes(Request) returns (Episodes) {}
     rpc GetUserEpisode(Request) returns (UserEpisode) {}
-    rpc UpdateUserEpisode(UserEpiReq) returns (Response) {}
-    rpc GetSubscriptions(Request) returns (Episodes) {}
-    rpc GetUserLastPlayed(Request) returns (Episode) {}
+    rpc UpdateUserEpisode(UserEpisodeReq) returns (Response) {}
+    rpc GetSubscriptions(Request) returns (Subscriptions) {}
+    rpc GetUserLastPlayed(Request) returns (LastPlayedRes) {}
 }
