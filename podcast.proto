@@ -60,8 +60,8 @@ message Request {
     string token = 1;
     ObjectID podcastID = 2;
     ObjectID episodeID = 3;
-    int32 start = 4;
-    int32 end = 5;
+    int64 start = 4;
+    int64 end = 5;
 }
 
 message UserEpisodeReq {
