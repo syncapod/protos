@@ -6,19 +6,23 @@ import "user.proto";
 option go_package = ".;protos";
 
 message AuthReq{
+	// used for Authentication
     string username = 1;
     string password = 2;
+    bool stayLoggedIn = 5;
+
     // used only for Authoriation
     string sessionKey = 3;
     string userAgent = 4;
-    bool stayLoggedIn = 5;
 }
 
 // AuthRes contains the status of the request
 // success == true : session key and user data will be populated
 message AuthRes{
     bool success = 1;
+	// only used with authentication
     string sessionKey = 2;
+	string message = 3;
     User user = 15;
 }
 

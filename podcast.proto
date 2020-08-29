@@ -92,7 +92,7 @@ message Episodes {
     repeated Episode episodes = 1;
 }
 
-service PodcastService{
+service Pod {
     rpc GetEpisodes(Request) returns (Episodes) {}
     rpc GetUserEpisode(Request) returns (UserEpisode) {}
     rpc UpdateUserEpisode(UserEpisodeReq) returns (Response) {}
