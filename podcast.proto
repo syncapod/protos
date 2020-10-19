@@ -57,7 +57,7 @@ message Episode {
 
 // start & end represen the amount of episodes to return
 message Request {
-    string token = 1;
+    //string token = 1;
     ObjectID podcastID = 2;
     ObjectID episodeID = 3;
     int64 start = 4;
@@ -65,7 +65,7 @@ message Request {
 }
 
 message UserEpisodeReq {
-    string token = 1;
+    //string token = 1;
     ObjectID podcastID = 2;
     ObjectID episodeID = 3;
     int64 offset = 4;
@@ -93,6 +93,7 @@ message Episodes {
 }
 
 service Pod {
+    rpc GetPodcast(Request) returns (Podcast) {}
     rpc GetEpisodes(Request) returns (Episodes) {}
     rpc GetUserEpisode(Request) returns (UserEpisode) {}
     rpc UpdateUserEpisode(UserEpisodeReq) returns (Response) {}
