@@ -93,6 +93,7 @@ message Episodes {
 }
 
 service Pod {
+    rpc GetPodcast(Request) returns (Podcast) {}
     rpc GetEpisodes(Request) returns (Episodes) {}
     rpc GetUserEpisode(Request) returns (UserEpisode) {}
     rpc UpdateUserEpisode(UserEpisodeReq) returns (Response) {}
