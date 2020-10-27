@@ -1,8 +1,0 @@
-syntax = "proto3";
-package protos;
-
-option go_package = ".;protos";
-
-message ObjectID {
-    string hex = 1;
-}

@@ -5,29 +5,36 @@ import "user.proto";
 
 option go_package = ".;protos";
 
-message AuthReq{
-	// used for Authentication
-    string username = 1;
+message AuthenticateReq {
+	string username = 1;
     string password = 2;
-    bool stayLoggedIn = 5;
-
-    // used only for Authoriation
-    string sessionKey = 3;
+    bool stayLoggedIn = 3;
     string userAgent = 4;
 }
 
-// AuthRes contains the status of the request
-// success == true : session key and user data will be populated
-message AuthRes{
-    bool success = 1;
-	// only used with authentication
-    string sessionKey = 2;
-	string message = 3;
-    User user = 15;
+message AuthenticateRes {
+	string sessionKey = 1;
+	User user = 2;
+}
+
+message AuthorizeReq {
+    string sessionKey = 1;
+}
+
+message AuthorizeRes {
+    User user = 1;
+}
+
+message LogoutReq {
+	string sessionKey = 1;
+}
+
+message LogoutRes {
+	bool success = 1;
 }
 
 service Auth {
-    rpc Authenticate(AuthReq) returns (AuthRes) {}
-    rpc Authorize(AuthReq) returns (AuthRes) {}
-    rpc Logout(AuthReq) returns (AuthRes) {}
+    rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) {}
+    rpc Authorize(AuthorizeReq) returns (AuthorizeRes) {}
+    rpc Logout(LogoutReq) returns (LogoutRes) {}
 }

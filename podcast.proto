@@ -18,7 +18,7 @@ message Category {
 }
 
 message Podcast {
-    ObjectID id = 1; 
+    string id = 1; 
     string title = 2;
     string author = 3;
     string type = 4;
@@ -35,8 +35,8 @@ message Podcast {
 }
 
 message Episode {
-    ObjectID id = 1;
-    ObjectID podcastID = 2;
+    string id = 1;
+    string podcastID = 2;
     string title = 3;
     string author = 4;
     string type = 5;
@@ -57,17 +57,17 @@ message Episode {
 
 // start & end represen the amount of episodes to return
 message Request {
-    string token = 1;
-    ObjectID podcastID = 2;
-    ObjectID episodeID = 3;
+    //string token = 1;
+    string podcastID = 2;
+    string episodeID = 3;
     int64 start = 4;
     int64 end = 5;
 }
 
 message UserEpisodeReq {
-    string token = 1;
-    ObjectID podcastID = 2;
-    ObjectID episodeID = 3;
+    //string token = 1;
+    string podcastID = 2;
+    string episodeID = 3;
     int64 offset = 4;
     google.protobuf.Timestamp lastSeen = 5;
     bool played = 6;
