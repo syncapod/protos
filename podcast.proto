@@ -2,7 +2,6 @@ syntax = "proto3";
 package protos;
 
 import "google/protobuf/timestamp.proto";
-import "objectID.proto";
 import "user.proto";
 
 option go_package = ".;protos";
