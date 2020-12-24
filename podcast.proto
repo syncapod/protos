@@ -20,8 +20,8 @@ message Podcast {
     string id = 1; 
     string title = 2;
     string author = 3;
-    string type = 4;
-    string subtitle = 5;
+    bool episodic = 4;
+    string summary = 5;
     string link = 6;
     Image image = 7;
     string explicit = 8;
