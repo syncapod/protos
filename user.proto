@@ -22,9 +22,9 @@ message Subscription {
 } 
 
 message UserEpisode {
-    string id = 1;
+    // string id = 1;
     string userID = 2;
-    string podcastID = 3;
+    // string podcastID = 3;
     string episodeID = 4;
     int64 offset = 5;
     google.protobuf.Timestamp lastSeen = 6;
