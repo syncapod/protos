@@ -31,8 +31,6 @@ message Podcast {
     google.protobuf.Timestamp pubDate = 12;
     google.protobuf.Timestamp lastBuildDate = 13;
     string rss = 14;
-    string summary = 15;
-    bool episodic = 16;
 }
 
 message Episode {
@@ -59,6 +57,7 @@ message Episode {
 
 message GetPodReq {
     string id = 1;
+}
 // start & end represent the amount of episodes to return
 message Request {
     //string token = 1;
