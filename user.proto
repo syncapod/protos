@@ -2,7 +2,6 @@ syntax = "proto3";
 package protos;
 
 import "google/protobuf/timestamp.proto";
-import "objectID.proto";
 
 option go_package = ".;protos";
 
@@ -23,13 +22,11 @@ message Subscription {
 } 
 
 message UserEpisode {
-    string id = 1;
-    string userID = 2;
-    string podcastID = 3;
-    string episodeID = 4;
-    int64 offset = 5;
-    google.protobuf.Timestamp lastSeen = 6;
-    bool played = 7;
+    string userID = 1;
+    string episodeID = 2;
+    int64 offset = 3;
+    google.protobuf.Timestamp lastSeen = 4;
+    bool played = 5;
 }
 
 message Session {

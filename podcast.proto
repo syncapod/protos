@@ -2,7 +2,6 @@ syntax = "proto3";
 package protos;
 
 import "google/protobuf/timestamp.proto";
-import "objectID.proto";
 import "user.proto";
 
 option go_package = ".;protos";
@@ -32,6 +31,8 @@ message Podcast {
     google.protobuf.Timestamp pubDate = 12;
     google.protobuf.Timestamp lastBuildDate = 13;
     string rss = 14;
+    string summary = 15;
+    bool episodic = 16;
 }
 
 message Episode {
@@ -39,7 +40,7 @@ message Episode {
     string podcastID = 2;
     string title = 3;
     string author = 4;
-    string type = 5;
+    string episodeType = 5;
     Image image = 6;
     google.protobuf.Timestamp pubDate = 7;
     string description = 8;
@@ -51,27 +52,28 @@ message Episode {
     string MP3URL = 14;
     int64 durationMillis = 15;
     string subtitle = 16;
+    string encoded = 17;
 }
 
 // (PodcastService)
 
-// start & end represen the amount of episodes to return
-message Request {
-    //string token = 1;
-    string podcastID = 2;
-    string episodeID = 3;
-    int64 start = 4;
-    int64 end = 5;
+message GetPodReq {
+    string id = 1;
 }
 
-message UserEpisodeReq {
-    //string token = 1;
-    string podcastID = 2;
-    string episodeID = 3;
-    int64 offset = 4;
-    google.protobuf.Timestamp lastSeen = 5;
-    bool played = 6;
+message GetEpiReq {
+    string id = 1;
+    int64 start = 2;
+    int64 end = 3;
 }
+
+message GetUserEpiReq {
+    string epiID = 1;
+}
+
+message GetSubReq { }
+
+message GetUserLastPlayedReq { }
 
 message Response {
     bool success = 1;
@@ -93,10 +95,15 @@ message Episodes {
 }
 
 service Pod {
-    rpc GetPodcast(Request) returns (Podcast) {}
-    rpc GetEpisodes(Request) returns (Episodes) {}
-    rpc GetUserEpisode(Request) returns (UserEpisode) {}
-    rpc UpdateUserEpisode(UserEpisodeReq) returns (Response) {}
-    rpc GetSubscriptions(Request) returns (Subscriptions) {}
-    rpc GetUserLastPlayed(Request) returns (LastPlayedRes) {}
+    // Podcast and Episodes
+    rpc GetPodcast(GetPodReq) returns (Podcast) {}
+    rpc GetEpisodes(GetEpiReq) returns (Episodes) {}
+    // UserEpisode
+    rpc GetUserEpisode(GetUserEpiReq) returns (UserEpisode) {}
+    rpc UpsertUserEpisode(UserEpisode) returns (Response) {}
+    // Subscriptions
+    rpc GetSubscriptions(GetSubReq) returns (Subscriptions) {}
+    rpc UpsertSubscription(Subscription) returns (Response) {}
+    // Misc.
+    rpc GetUserLastPlayed(GetUserLastPlayedReq) returns (LastPlayedRes) {}
 }
