@@ -1,15 +1,16 @@
 syntax = "proto3";
 package protos;
 
+import "google/api/annotations.proto";
 import "user.proto";
 
 option go_package = ".;protos";
 
 message AuthenticateReq {
 	string username = 1;
-    string password = 2;
-    bool stayLoggedIn = 3;
-    string userAgent = 4;
+	string password = 2;
+	bool stayLoggedIn = 3;
+	string userAgent = 4;
 }
 
 message AuthenticateRes {
@@ -18,11 +19,11 @@ message AuthenticateRes {
 }
 
 message AuthorizeReq {
-    string sessionKey = 1;
+	string sessionKey = 1;
 }
 
 message AuthorizeRes {
-    User user = 1;
+	User user = 1;
 }
 
 message LogoutReq {
@@ -34,7 +35,22 @@ message LogoutRes {
 }
 
 service Auth {
-    rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) {}
-    rpc Authorize(AuthorizeReq) returns (AuthorizeRes) {}
-    rpc Logout(LogoutReq) returns (LogoutRes) {}
+	rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) {
+		option (google.api.http) = {
+			post: "/v1/auth/authenticate" 
+			body: "*"
+		};
+	}
+	rpc Authorize(AuthorizeReq) returns (AuthorizeRes) {
+		option (google.api.http) = {
+			post: "/v1/auth/authorize"
+			body: "*"
+		};
+	}
+	rpc Logout(LogoutReq) returns (LogoutRes) {
+		option (google.api.http) = {
+			post: "/v1/auth/logout"
+			body: "*"
+		};
+	}
 }
