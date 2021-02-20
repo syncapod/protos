@@ -1,0 +1,34 @@
+syntax = "proto3";
+package protos;
+
+import "google/api/annotations.proto";
+import "podcast.proto";
+
+option go_package = ".;protos";
+
+message AddPodReq {
+	string url = 1;
+}
+
+message AddPodRes {
+	Podcast podcast = 1;
+}
+
+message RefPodReq {}
+message RefPodRes {}
+
+service Admin {
+	// Podcasts
+	rpc AddPodcast(AddPodReq) returns (AddPodRes) {
+		option (google.api.http) = {
+			post: "/v1/admin/add_podcast"
+			body: "*"
+		};
+	}
+	rpc RefreshPodcast(RefPodReq) returns (RefPodRes) {
+		option (google.api.http) = {
+			post: "/v1/admin/refresh_podcast"
+			body: "*"
+		};
+	}
+}
