@@ -41,12 +41,12 @@ service Auth {
 			body: "*"
 		};
 	}
-	rpc Authorize(AuthorizeReq) returns (AuthorizeRes) {
-		option (google.api.http) = {
-			post: "/v1/auth/authorize"
-			body: "*"
-		};
-	}
+	/* rpc Authorize(AuthorizeReq) returns (AuthorizeRes) { */
+	/* 	option (google.api.http) = { */
+	/* 		post: "/v1/auth/authorize" */
+	/* 		body: "*" */
+	/* 	}; */
+	/* } */
 	rpc Logout(LogoutReq) returns (LogoutRes) {
 		option (google.api.http) = {
 			post: "/v1/auth/logout"

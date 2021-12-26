@@ -135,12 +135,12 @@ service Pod {
 			body: "*"
 		};
 	}
-    rpc UpsertSubscription(Subscription) returns (Response) {
-		option (google.api.http) = {
-			post: "/v1/podcast/upsert_subscription"
-			body: "*"
-		};
-	}
+    /* rpc UpsertSubscription(Subscription) returns (Response) { */
+		/* option (google.api.http) = { */
+			/* post: "/v1/podcast/upsert_subscription" */
+			/* body: "*" */
+		/* }; */
+	/* } */
     // Misc.
     rpc GetUserLastPlayed(GetUserLastPlayedReq) returns (LastPlayedRes) {
 		option (google.api.http) = {
