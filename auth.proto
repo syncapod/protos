@@ -34,7 +34,21 @@ message LogoutRes {
 	bool success = 1;
 }
 
+// CreateAccountReq contains the necessary information for user account creation
+message CreateAccountReq {
+	string username = 1;
+	string email = 2;
+	string password = 3;
+	bool acceptTerms = 4;
+}
+
+// CreateAccountRes sends back an error message (if any)
+message CreateAccountRes {
+	string error;
+}
+
 service Auth {
+	rpc CreateAccount(CreateAccountReq) returns (CreateAccountRes) { }
 	rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) {
 		option (google.api.http) = {
 			post: "/v1/auth/authenticate" 
