@@ -1,7 +1,6 @@
 syntax = "proto3";
 package protos;
 
-import "google/api/annotations.proto";
 import "user.proto";
 
 option go_package = ".;protos";
@@ -39,32 +38,32 @@ message CreateAccountReq {
 	string username = 1;
 	string email = 2;
 	string password = 3;
-	bool acceptTerms = 4;
+	int64 dateOfBirth = 4;
+	bool acceptTerms = 5;
 }
 
 // CreateAccountRes sends back an error message (if any)
 message CreateAccountRes {
-	string error;
+	string error = 1;
+}
+
+message ResetPasswordReq {
+	string email = 1;
+}
+
+message ResetPasswordRes {
+	string error = 1;
 }
 
 service Auth {
 	rpc CreateAccount(CreateAccountReq) returns (CreateAccountRes) { }
-	rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) {
-		option (google.api.http) = {
-			post: "/v1/auth/authenticate" 
-			body: "*"
-		};
-	}
+	rpc ResetPassword(ResetPasswordReq) returns (ResetPasswordRes) { }
+	rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) { }
 	/* rpc Authorize(AuthorizeReq) returns (AuthorizeRes) { */
 	/* 	option (google.api.http) = { */
 	/* 		post: "/v1/auth/authorize" */
 	/* 		body: "*" */
 	/* 	}; */
 	/* } */
-	rpc Logout(LogoutReq) returns (LogoutRes) {
-		option (google.api.http) = {
-			post: "/v1/auth/logout"
-			body: "*"
-		};
-	}
+	rpc Logout(LogoutReq) returns (LogoutRes) { }
 }
