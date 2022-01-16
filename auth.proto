@@ -55,15 +55,17 @@ message ResetPasswordRes {
 	string error = 1;
 }
 
+message ActivateReq {
+	string token = 1;
+}
+
+message ActivateRes { }
+
 service Auth {
 	rpc CreateAccount(CreateAccountReq) returns (CreateAccountRes) { }
+	rpc Activate(ActivateReq) returns (ActivateRes) { } 
 	rpc ResetPassword(ResetPasswordReq) returns (ResetPasswordRes) { }
 	rpc Authenticate(AuthenticateReq) returns (AuthenticateRes) { }
-	/* rpc Authorize(AuthorizeReq) returns (AuthorizeRes) { */
-	/* 	option (google.api.http) = { */
-	/* 		post: "/v1/auth/authorize" */
-	/* 		body: "*" */
-	/* 	}; */
-	/* } */
+	rpc Authorize(AuthorizeReq) returns (AuthorizeRes) { }
 	rpc Logout(LogoutReq) returns (LogoutRes) { }
 }

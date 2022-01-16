@@ -1,7 +1,6 @@
 syntax = "proto3";
 package protos;
 
-import "google/api/annotations.proto";
 import "podcast.proto";
 
 option go_package = ".;protos";
@@ -17,18 +16,17 @@ message AddPodRes {
 message RefPodReq {}
 message RefPodRes {}
 
+message SearchPodReq {
+	string text = 1;
+}
+
+message SearchPodRes {
+	repeated Podcast podcasts = 1;
+}
+
 service Admin {
 	// Podcasts
-	rpc AddPodcast(AddPodReq) returns (AddPodRes) {
-		option (google.api.http) = {
-			post: "/v1/admin/add_podcast"
-			body: "*"
-		};
-	}
-	rpc RefreshPodcast(RefPodReq) returns (RefPodRes) {
-		option (google.api.http) = {
-			post: "/v1/admin/refresh_podcast"
-			body: "*"
-		};
-	}
+	rpc AddPodcast(AddPodReq) returns (AddPodRes) { }
+	rpc RefreshPodcast(RefPodReq) returns (RefPodRes) { }
+	rpc SearchPodcasts(SearchPodReq) returns (SearchPodRes) { }
 }

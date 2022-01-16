@@ -1,7 +1,6 @@
 syntax = "proto3";
 package protos;
 
-import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "user.proto";
 
@@ -59,6 +58,7 @@ message Episode {
 message GetPodReq {
     string id = 1;
 }
+
 // start & end represent the amount of episodes to return
 message Request {
     //string token = 1;
@@ -103,49 +103,17 @@ message Episodes {
 
 service Pod {
     // Podcast and Episodes
-    rpc GetPodcast(GetPodReq) returns (Podcast) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_podcast"
-			body: "*"
-		};
-	}
-    rpc GetEpisodes(GetEpiReq) returns (Episodes) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_episodes"
-			body: "*"
-		};
-	}
+    rpc GetPodcast(GetPodReq) returns (Podcast) { }
+    rpc GetEpisodes(GetEpiReq) returns (Episodes) { }
+
     // UserEpisode
-    rpc GetUserEpisode(GetUserEpiReq) returns (UserEpisode) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_user_episode"
-			body: "*"
-		};
-	}
-    rpc UpsertUserEpisode(UserEpisode) returns (Response) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_user_episode"
-			body: "*"
-		};
-	}
+    rpc GetUserEpisode(GetUserEpiReq) returns (UserEpisode) { }
+    rpc UpsertUserEpisode(UserEpisode) returns (Response) { }
+
     // Subscriptions
-    rpc GetSubscriptions(GetSubReq) returns (Subscriptions) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_subscriptions"
-			body: "*"
-		};
-	}
-    /* rpc UpsertSubscription(Subscription) returns (Response) { */
-		/* option (google.api.http) = { */
-			/* post: "/v1/podcast/upsert_subscription" */
-			/* body: "*" */
-		/* }; */
-	/* } */
+    rpc GetSubscriptions(GetSubReq) returns (Subscriptions) { }
+    /* rpc UpsertSubscription(Subscription) returns (Response) { } */
+
     // Misc.
-    rpc GetUserLastPlayed(GetUserLastPlayedReq) returns (LastPlayedRes) {
-		option (google.api.http) = {
-			post: "/v1/podcast/get_user_last_played"
-			body: "*"
-		};
-	}
+    rpc GetUserLastPlayed(GetUserLastPlayedReq) returns (LastPlayedRes) { }
 }
