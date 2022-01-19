@@ -10,6 +10,7 @@ message AuthenticateReq {
 	string password = 2;
 	bool stayLoggedIn = 3;
 	string userAgent = 4;
+	bool admin = 5;
 }
 
 message AuthenticateRes {
@@ -19,6 +20,7 @@ message AuthenticateRes {
 
 message AuthorizeReq {
 	string sessionKey = 1;
+	bool admin = 2;
 }
 
 message AuthorizeRes {
